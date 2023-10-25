@@ -324,5 +324,5 @@ mpiexec -n 4 python test.py
 - https://glmdev.medium.com/building-a-raspberry-pi-cluster-784f0df9afbd
 - https://endtoendpaper.com/2020/02/04/five-pi-raspberry-pi-cluster/
 - https://raspberrytips.com/raspberry-pi-cluster/
-
+- https://www.mpich.org/static/downloads/4.1.2/mpich-4.1.2-installguide.pdf
 
