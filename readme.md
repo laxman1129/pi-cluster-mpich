@@ -9,9 +9,9 @@
 
 ## get ip addresses
 
-node01 192.168.1.147
-node02 192.168.1.118
-node03 192.168.1.1077
+node01 192.168.1.147  
+node02 192.168.1.118  
+node03 192.168.1.1077  
 
 ## remove existing references from known hosts
 `gedit ~/.ssh/known_hosts`
@@ -20,9 +20,9 @@ node03 192.168.1.1077
 `sudo nano /etc/hosts`
 
 
-192.168.1.147 pi-1
-192.168.1.118 pi-2
-192.168.1.107 pi-3
+192.168.1.147 pi-1  
+192.168.1.118 pi-2  
+192.168.1.107 pi-3  
 
 
 ## login to each node and update the system
@@ -117,7 +117,7 @@ NOTE : below steps are done all on the master node, unless specified
 
 
 ---
-## Configure the Master Node for SLRUM (slurm doesnot work)
+## Configure the Master Node for SLRUM (slurm does not work)
 
 **NOTE : instructions are for master, unless specifieds**
 
