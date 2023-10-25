@@ -63,11 +63,11 @@ NOTE : below steps are done all on the master node, unless specified
     ![Alt text](image-1.png)
 
     - edit `fstab` (file system table) to mount the drive on boot  
-    `sudo nano /etc/fstab`
+    `sudo nano /etc/fstab`  
     ![Alt text](image-2.png)
     
     - mount the drive  
-    `sudo mount -a`
+    `sudo mount -a`  
     `systemctl daemon-reload`
 
     - Set loose permissions  
@@ -78,23 +78,23 @@ NOTE : below steps are done all on the master node, unless specified
 
 ## Export the NFS Share
 
-- install nfs server
+- install nfs server  
     - `sudo apt install nfs-kernel-server -y`
 
-- export nfs share
+- export nfs share  
     - `sudo nano /etc/exports`  
     ![Alt text](image-3.png)
 
 - update nfs kernal server     
     `sudo exportfs -a`
 
-## Mount the NFS Share on the Clients
+## Mount the NFS Share on the Clients  
 **NOTE: this is for clients**
 
-- install client
-    `sudo apt install nfs-common -y`
+- install client  
+    `sudo apt install nfs-common -y`  
 
-- create the mount folder
+- create the mount folder  
     ```
     sudo mkdir /clusterfs
     sudo chown nobody:nogroup /clusterfs
@@ -104,12 +104,12 @@ NOTE : below steps are done all on the master node, unless specified
 - setup automatic mounting  
     `sudo nano /etc/fstab`
 
-    - add below line
+    - add below line  
     ```
     # <master node ip>:/clusterfs    /clusterfs    nfs    defaults   0 0
     192.168.1.147:/clusterfs    /clusterfs    nfs    defaults   0 0
     ```
-- mount with it
+- mount with it  
     ```
     sudo mount -a
     sudo chmod -R 777 /clusterfs
@@ -119,7 +119,7 @@ NOTE : below steps are done all on the master node, unless specified
 ---
 ## Configure the Master Node for SLRUM (slurm does not work)
 
-**NOTE : instructions are for master, unless specifieds**
+**NOTE : instructions are for master, unless specifieds**  
 
 - update master as well as nodes `sudo nano /etc/hosts` file with the ip and hostnames
 
@@ -128,10 +128,10 @@ NOTE : below steps are done all on the master node, unless specified
 192.168.1.107 node03  
 
 
-- Install the SLURM Controller Packages
+- Install the SLURM Controller Packages  
     `sudo apt install slurm-wlm -y`
 
-- slrum config
+- slrum config  
     ```
     cd /etc/slurm
     sudo cp /usr/share/doc/slurm-client/examples/slurm.conf.simple.gz .
@@ -149,21 +149,21 @@ NOTE : below steps are done all on the master node, unless specified
     # e.g.: node01(192.168.1.147)
     ```
 
-- Customize the scheduler algorithm (optional)
+- Customize the scheduler algorithm (optional)  
     ```
     SelectType=select/cons_res
     SelectTypeParameters=CR_Core
     ```
 
-- Set the cluster name
+- Set the cluster name  
     ```
     ClusterName=picluster
     ```
 
-- Add the nodes
+- Add the nodes  
     ```
-    # NodeName=node01 NodeAddr=<ip addr node01> CPUs=4 State=UNKNOWN
-    # NodeName=node02 NodeAddr=<ip addr node02> CPUs=4 State=UNKNOWN
+    # NodeName=node01 NodeAddr=<ip addr node01> CPUs=4 State=UNKNOWN  
+    # NodeName=node02 NodeAddr=<ip addr node02> CPUs=4 State=UNKNOWN  
     # NodeName=node03 NodeAddr=<ip addr node03> CPUs=4 State=UNKNOWN
     
 
@@ -208,7 +208,7 @@ MinRAMSpace=30
 /clusterfs*
 ```
 
-### Copy the Configuration Files to Shared Storage
+### Copy the Configuration Files to Shared Storage  
 
 ```
 sudo cp slurm.conf cgroup.conf cgroup_allowed_devices_file.conf /clusterfs
@@ -241,7 +241,7 @@ sudo systemctl start slurmctld
 - Install the SLURM Client  
 `sudo apt install slurmd slurm-client -y`
 
-- Copy the Configuration Files
+- Copy the Configuration Files 
 ```
 sudo cp /clusterfs/munge.key /etc/munge/munge.key
 sudo cp /clusterfs/slurm.conf /etc/slurm/slurm.conf
